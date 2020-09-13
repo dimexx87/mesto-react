@@ -1,0 +1,17 @@
+@import url(./__item/photo-grid__item.css);
+@import url(./__image/photo-grid__image.css);
+@import url(./__title/photo-grid__title.css);
+@import url(./__like/photo-grid__like.css);
+@import url(./__like/_active/photo-grid__like_active.css);
+@import url(./__delete/photo-grid__delete.css);
+@import url(./__delete/_black/photo-grid__delete_black.css);
+@import url(./__likes/photo-grid__likes.css);
+@import url(./__like-number/photo-grid__like-number.css);
+
+.photo-grid {
+  max-width: 882px;
+  margin: 50px auto 0px;
+  display: grid;
+  grid-gap: 21px 18px;
+  grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
+}

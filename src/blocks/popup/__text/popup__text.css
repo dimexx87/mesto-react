@@ -1,0 +1,13 @@
+.popup__text {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  border: none;
+  padding: 13px 0 13px;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+}
+
+.popup__text:focus {
+  outline-color: rgba(0, 0, 0, 0.1);
+}

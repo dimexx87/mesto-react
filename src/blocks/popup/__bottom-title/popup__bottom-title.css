@@ -1,0 +1,9 @@
+.popup__bottom-title {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transform: translate(0, 100%);
+}

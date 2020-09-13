@@ -1,0 +1,8 @@
+.photo-grid__likes {
+  position: absolute;
+  bottom: 24px;
+  right: 21px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

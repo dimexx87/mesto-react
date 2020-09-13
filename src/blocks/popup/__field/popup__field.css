@@ -1,0 +1,10 @@
+.popup__field {
+  min-height: 27.26px;
+  margin: 0 36px 0 36px;
+}
+
+@media all and (max-width: 320px) {
+  .popup__field {
+    margin: 0 15px 0 15px;
+  }
+}

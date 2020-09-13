@@ -1,0 +1,9 @@
+.popup__field_info_name {
+  margin-top: 41px;
+}
+
+@media all and (max-width: 420px) {
+  .popup__field_info_name {
+    margin-top: 20px;
+  }
+}

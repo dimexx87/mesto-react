@@ -1,0 +1,10 @@
+.popup__input-error {
+  font-size: 12px;
+  color: red;
+}
+
+@media all and (max-width: 3210px) {
+  .popup__input-error {
+    font-size: 10px;
+  }
+}
