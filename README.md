@@ -2,7 +2,7 @@
 
 ---
 
-**ссылка на проект:** https://dimexx87.github.io/mesto-react/.
+**ссылка на проект:** https://dimexx87.github.io/mesto-react/publik/index.html
 
 ## Описание проекта:
 
