@@ -45,7 +45,6 @@ function Main(props) {
               <div className="profile__avatar-edit"></div>
             </div>
             <img
-              alt='avatar'
               style={{
                 margin: 0,
                 width: 120,
@@ -58,7 +57,8 @@ function Main(props) {
                 left: 0,
                 zIndex: 1,
                 backgroundImage: `url(${userAvatar})`
-              }} />
+              }}
+            />
           </button>
           <div className="profile__author">
             <div className="profile__edit-line">
