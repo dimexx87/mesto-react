@@ -52,13 +52,9 @@ function Main(props) {
               <div className="profile__avatar-edit"></div>
             </div>
             <img
+              alt="owner face"
               className="profile__photo"
-              style={{
-                alt: "photo of the owner",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundImage: `url(${userAvatar})`,
-              }}
+              src={userAvatar}
             />
           </button>
           <div className="profile__author">
@@ -83,14 +79,14 @@ function Main(props) {
         {isLoading ? (
           <Spinner />
         ) : (
-          cards.map((card) => (
-            <Card
-              {...card}
-              onCardClick={props.onCardClick}
-              onCardDelete={props.onCardDelete}
-            />
-          ))
-        )}
+            cards.map((card) => (
+              <Card
+                {...card}
+                onCardClick={props.onCardClick}
+                onCardDelete={props.onCardDelete}
+              />
+            ))
+          )}
       </section>
     </main>
   );
