@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
-import PopupWithForm from './PopupWithForm'
-import ImagePopup from './ImagePopup';
+import React, { useEffect, useState } from "react";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
-
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -19,19 +17,19 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setIsPlacePopupOpen(false)
+    setIsPlacePopupOpen(false);
     setIsDeletePlacePopupOpen(false);
     setSelectedCard({});
-  }
+  };
 
   const handleCardClick = (props) => {
     setIsPlacePopupOpen(true);
-    setSelectedCard(props); 
-  }
+    setSelectedCard(props);
+  };
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
-  }
+  };
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -47,12 +45,25 @@ function App() {
   return (
     <div className="page">
       <Header />
-      
+
       {/* handlers of the page buttons */}
-      <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onDeletePlace={handleDeletePlaceClick} onCardDelete={handleDeletePlaceClick} />
+      <Main
+        onEditAvatar={handleEditAvatarClick}
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
+        onDeletePlace={handleDeletePlaceClick}
+        onCardDelete={handleDeletePlaceClick}
+      />
 
       {/* PopUp for PROFILE Editing */}
-      <PopupWithForm isOpen={isEditProfilePopupOpen} name={'editProfileForm'} title={'Редактировать профиль'} onClose={closeAllPopups}>
+      <PopupWithForm
+        isOpen={isEditProfilePopupOpen}
+        name={"editProfileForm"}
+        title={"Редактировать профиль"}
+        onClose={closeAllPopups}
+        buttonText={"Сохранить"}
+      >
         {
           <>
             <div className="popup__field popup__field_info_name">
@@ -87,7 +98,13 @@ function App() {
       </PopupWithForm>
 
       {/* PopUp for AVATAR Editing */}
-      <PopupWithForm isOpen={isEditAvatarPopupOpen} name={'editAvatarForm'} title={'Обновить аватар'} onClose={closeAllPopups}>
+      <PopupWithForm
+        isOpen={isEditAvatarPopupOpen}
+        name={"editAvatarForm"}
+        title={"Обновить аватар"}
+        onClose={closeAllPopups}
+        buttonText={"Сохранить"}
+      >
         {
           <div className="popup__field popup__field_info_other">
             <input
@@ -104,7 +121,13 @@ function App() {
       </PopupWithForm>
 
       {/* PopUp for CARD Adding */}
-      <PopupWithForm isOpen={isAddPlacePopupOpen} name={'addCardForm'} title={'Новое место'} onClose={closeAllPopups}>
+      <PopupWithForm
+        isOpen={isAddPlacePopupOpen}
+        name={"addCardForm"}
+        title={"Новое место"}
+        onClose={closeAllPopups}
+        buttonText={"Добавить"}
+      >
         {
           <>
             <div className="popup__field popup__field_info_name">
@@ -136,9 +159,20 @@ function App() {
       </PopupWithForm>
 
       {/* PopUp for CARD Deleting */}
-      <PopupWithForm isOpen={isDeletePlacePopupOpen} name={'deleteCardForm'} title={'Вы уверены?'} onClose={closeAllPopups} />
+      <PopupWithForm
+        isOpen={isDeletePlacePopupOpen}
+        name={"deleteCardForm"}
+        title={"Вы уверены?"}
+        onClose={closeAllPopups}
+        buttonText={"Да"}
+      />
 
-      <ImagePopup isOpen={isPlacePopupOpen} onClose={closeAllPopups} name={selectedCard.name} src={selectedCard.src} />
+      <ImagePopup
+        isOpen={isPlacePopupOpen}
+        onClose={closeAllPopups}
+        name={selectedCard.name}
+        src={selectedCard.src}
+      />
       <Footer />
     </div>
   );
