@@ -6,6 +6,7 @@ const ImagePopup = (card) => {
     <div className={card.isOpen ? `popup popup_type_${card.name} popup_opened` : `popup popup_type_${card.name}`}>
       <form className="popup__picture-container">
         <img
+          alt='tremendous screen'
           src={card.src}
           className="popup__image"
         />

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../utils/Api';
-import Card from './Card'
-import { link } from '../utils/utils/constants';
-import PopupWithForm from './PopupWithForm'
+import Card from './Card';
 import Spinner from './Spinner/Spinner';
 
 function Main(props) {
@@ -47,6 +45,7 @@ function Main(props) {
               <div className="profile__avatar-edit"></div>
             </div>
             <img
+              alt='avatar'
               style={{
                 margin: 0,
                 width: 120,

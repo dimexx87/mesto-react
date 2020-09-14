@@ -10,7 +10,6 @@ const popUpPhotoEdit = document.querySelector("#avatar");
 const popUpDelete = document.querySelector("#deleteCard");
 const formEditElement = document.querySelector("#formEditElement");
 const formAddElement = document.querySelector("#formAddElement");
-const formDeleteElement = document.querySelector("#deleteElement");
 const gridContainer = document.querySelector(".photo-grid");
 const cardTemplate = document.querySelector("#cardTemplate");
 const place = document.querySelector("#place");

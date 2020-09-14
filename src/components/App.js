@@ -4,12 +4,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm'
-import api from '../utils/Api';
 import ImagePopup from './ImagePopup';
-
-let isEditProfilePopupOpen = false;
-let isAddPlacePopupOpen = false;
-let isEditAvatarPopupOpen = false;
 
 function App() {
 
