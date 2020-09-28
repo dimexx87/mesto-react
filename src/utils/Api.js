@@ -45,7 +45,7 @@ class Api {
   }
 
   insertCard(name, link) {
-    fetch(`${this.url}/cards`, {
+    return fetch(`${this.url}/cards`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({
@@ -55,27 +55,17 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  setLike(cardID) {
-    fetch(`${this.url}/cards/likes/${cardID}`, {
-      method: "PUT",
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this.url}/cards/likes/${cardId}`, {
+      method: isLiked ? "DELETE" : "PUT",
       headers: this.headers,
-      body: JSON.stringify({}),
-    }).then(this._handleResponse);
-  }
-
-  deleteLike(cardID) {
-    fetch(`${this.url}/cards/likes/${cardID}`, {
-      method: "DELETE",
-      headers: this.headers,
-      body: JSON.stringify({}),
     }).then(this._handleResponse);
   }
 
   deleteCard(cardId) {
-    fetch(`${this.url}/cards/${cardId}`, {
+    return fetch(`${this.url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-      body: JSON.stringify({}),
     }).then(this._handleResponse);
   }
 }

@@ -13,6 +13,7 @@ function PopupWithForm({ isOpen, name, title, children, ...rest }) {
         className="popup__container popup__form_card"
         name={name}
         noValidate
+        onSubmit={rest.onSubmit}
       >
         <button
           onClick={rest.onClose}

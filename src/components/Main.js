@@ -1,92 +1,53 @@
-import React, { useEffect, useState } from "react";
-import api from "../utils/Api";
+import React from "react";
 import Card from "./Card";
-import Spinner from "./Spinner/Spinner";
+import { CurrentUserContext } from "../context/CurrentUserContext";
 
-function Main(props) {
-  const [userName, setUserName] = useState();
-  const [userDescription, setUserDescription] = useState();
-  const [userAvatar, setUserAvatar] = useState();
-  const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    api
-      .getAvatarInfo()
-      .then((response) => {
-        setUserName(response.name);
-        setUserDescription(response.about);
-        setUserAvatar(response.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
-    api
-      .getInitialCards()
-      .then((response) => {
-        const items = response.map((item) => ({
-          key: item._id,
-          ownerId: item.owner._id,
-          likes: item.likes.length,
-          name: item.name,
-          src: item.link,
-        }));
-        setCards(items);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
+function Main({ cards, ...rest }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main id="abc" className="content">
       <section className="profile">
         <div className="profile__info">
-          <button onClick={props.onEditAvatar} className="profile__avatar">
+          <button onClick={rest.onEditAvatar} className="profile__avatar">
             <div className="profile__overlay">
               <div className="profile__avatar-edit"></div>
             </div>
             <img
               alt="owner face"
               className="profile__photo"
-              src={userAvatar}
+              src={currentUser.avatar}
             />
           </button>
           <div className="profile__author">
             <div className="profile__edit-line">
-              <h1 className="profile__title">{userName}</h1>
+              <h1 className="profile__title">{currentUser.name}</h1>
               <button
-                onClick={props.onEditProfile}
+                onClick={rest.onEditProfile}
                 type="button"
                 className="profile__btn-edit"
               ></button>
             </div>
-            <h2 className="profile__subtitle">{userDescription}</h2>
+            <h2 className="profile__subtitle">{currentUser.about}</h2>
           </div>
         </div>
         <button
-          onClick={props.onAddPlace}
+          onClick={rest.onAddPlace}
           type="button"
           className="profile__btn-add"
         ></button>
       </section>
       <section className="photo-grid">
-        {isLoading ? (
-          <Spinner />
-        ) : (
-            cards.map((card) => (
+        {cards
+          ? cards.map((card) => (
               <Card
                 {...card}
-                onCardClick={props.onCardClick}
-                onCardDelete={props.onCardDelete}
+                onCardClick={rest.onCardClick}
+                onCardDelete={rest.onCardDelete}
+                onCardLike={rest.onCardLike}
               />
             ))
-          )}
+          : null}
       </section>
     </main>
   );

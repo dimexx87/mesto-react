@@ -1,3 +1,6 @@
+@import url(../__delete/_hidden/photo-grid__delete_hidden.css);
+@import url(../__delete/_visible/photo-grid__delete_visible.css);
+
 .photo-grid__delete {
   width: 18px;
   height: 19.3px;

@@ -1,3 +1,6 @@
+@import url(./_hidden/photo-grid__like-number_hidden.css);
+@import url(./_visible/photo-grid__like-number_visible.css);
+
 .photo-grid__like-number {
   margin: 0;
   font-size: 13px;
