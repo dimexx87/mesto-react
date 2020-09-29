@@ -20,9 +20,12 @@ const AddPlacePopup = (props) => {
       place,
       link,
     });
+  }
+
+  React.useEffect(() => {
     setPlace("");
     setLink("");
-  }
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm

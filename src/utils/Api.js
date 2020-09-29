@@ -17,13 +17,13 @@ class Api {
     return Promise.reject(`Ошибка: ${response.status}`);
   }
 
-  getAvatarInfo() {
+  getUserInfo() {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
     }).then(this._handleResponse);
   }
 
-  setAvatarInfo(name, about) {
+  setUserInfo(name, about) {
     return fetch(`${this.url}/users/me`, {
       method: "PATCH",
       headers: this.headers,

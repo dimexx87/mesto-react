@@ -12,24 +12,16 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState();
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api
-      .getAvatarInfo()
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then((response) => {
-        setCurrentUser(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((response) => {
-        const items = response.map((item) => ({
+        const [profile, cards] = response;
+        //fill profile elemements
+        setCurrentUser(profile);
+        //fill cards elemements
+        const items = cards.map((item) => ({
           key: item._id,
           cardId: item._id,
           ownerId: item.owner._id,
@@ -51,30 +43,39 @@ function App() {
     const isLiked = card.like.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(cardId, isLiked).then((newCard) => {
-      const newCardFormat = {
-        key: newCard._id,
-        cardId: newCard._id,
-        ownerId: newCard.owner._id,
-        likes: newCard.likes.length,
-        like: newCard.likes,
-        name: newCard.name,
-        src: newCard.link,
-      };
-      // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-      const newCards = cards.map((c) =>
-        c.cardId === cardId ? newCardFormat : c
-      );
-      // Обновляем стейт
-      handleUpdateCard({ newCards });
-    });
+    api
+      .changeLikeCardStatus(cardId, isLiked)
+      .then((newCard) => {
+        const newCardFormat = {
+          key: newCard._id,
+          cardId: newCard._id,
+          ownerId: newCard.owner._id,
+          likes: newCard.likes.length,
+          like: newCard.likes,
+          name: newCard.name,
+          src: newCard.link,
+        };
+        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
+        const newCards = cards.map((c) =>
+          c.cardId === cardId ? newCardFormat : c
+        );
+        // Обновляем стейт
+        handleUpdateCard({ newCards });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardDelete(card) {
     const cardId = card.cardId;
-    api.deleteCard(cardId);
     const withoutDeleted = cards.filter((с) => card.cardId !== с.cardId);
-    setCards(withoutDeleted);
+    api
+      .deleteCard(cardId)
+      .then(() => setCards(withoutDeleted))
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateCard(newCards) {
@@ -93,14 +94,14 @@ function App() {
 
   function handleUpdateUser(newProfile) {
     api
-      .setAvatarInfo(newProfile.name, newProfile.about)
+      .setUserInfo(newProfile.name, newProfile.about)
       .then((response) => {
         setCurrentUser(response);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-    closeAllPopups();
   }
 
   function handleUpdateAvatar(avatarLink) {
@@ -108,11 +109,11 @@ function App() {
       .setAvatar(avatarLink.avatar)
       .then((response) => {
         setCurrentUser(response);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-    closeAllPopups();
   }
 
   function handleAddPlaceSubmit(newPlace) {
@@ -129,11 +130,11 @@ function App() {
           src: newCard.link,
         };
         setCards([newCardFormat, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-    closeAllPopups();
   }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
