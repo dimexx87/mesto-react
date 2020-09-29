@@ -22,7 +22,9 @@ const EditAvatarPopup = (props) => {
       onSubmit={handleSubmit}
       name={"editAvatarForm"}
       title={"Обновить аватар"}
+      isLoading={props.isLoading}
       buttonText={"Сохранить"}
+      buttonTextIsLoading={"Сохранение ..."}
     >
       {
         <div className="popup__field popup__field_info_other">
@@ -42,4 +44,4 @@ const EditAvatarPopup = (props) => {
   );
 };
 
-export default EditAvatarPopup;
+export default EditAvatarPopup

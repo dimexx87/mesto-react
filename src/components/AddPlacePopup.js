@@ -34,7 +34,9 @@ const AddPlacePopup = (props) => {
       onSubmit={handleSubmit}
       name={"addCardForm"}
       title={"Новое место"}
+      isLoading={props.isLoading}
       buttonText={"Добавить"}
+      buttonTextIsLoading={"Добавление ..."}
     >
       {
         <>

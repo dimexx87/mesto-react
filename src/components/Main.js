@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../context/CurrentUserContext";
+import Spinner from "./Spinner/Spinner";
 
 function Main({ cards, ...rest }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -38,16 +39,18 @@ function Main({ cards, ...rest }) {
         ></button>
       </section>
       <section className="photo-grid">
-        {cards
-          ? cards.map((card) => (
-              <Card
-                {...card}
-                onCardClick={rest.onCardClick}
-                onCardDelete={rest.onCardDelete}
-                onCardLike={rest.onCardLike}
-              />
-            ))
-          : null}
+        {rest.isStartLoading && cards ? (
+          <Spinner />
+        ) : (
+          cards.map((card) => (
+            <Card
+              {...card}
+              onCardClick={rest.onCardClick}
+              onCardDelete={rest.onCardDelete}
+              onCardLike={rest.onCardLike}
+            />
+          ))
+        )}
       </section>
     </main>
   );

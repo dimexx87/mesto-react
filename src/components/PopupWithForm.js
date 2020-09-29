@@ -22,9 +22,10 @@ function PopupWithForm({ isOpen, name, title, children, ...rest }) {
         ></button>
         <div className="popup__title">{title}</div>
         <>{children}</>
-        <button className="popup__btn-save" id="saveButtonProfile">
-          {rest.buttonText}
-        </button>
+        {rest.isLoading 
+        ? <button className="popup__btn-save" id="saveButtonProfile">{rest. buttonTextIsLoading}</button>
+        : <button className="popup__btn-save" id="saveButtonProfile">{rest.buttonText}</button>
+        }
       </form>
     </div>
   );
