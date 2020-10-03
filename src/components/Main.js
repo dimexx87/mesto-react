@@ -3,7 +3,7 @@ import Card from "./Card";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import Spinner from "./Spinner/Spinner";
 
-function Main({ cards, ...rest }) {
+export const Main = ({ cards, ...rest }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
@@ -55,5 +55,3 @@ function Main({ cards, ...rest }) {
     </main>
   );
 }
-
-export default Main;

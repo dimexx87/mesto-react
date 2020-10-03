@@ -1,6 +1,10 @@
 import React from "react";
 
-function PopupWithForm({ isOpen, name, title, children, ...rest }) {
+export const PopupWithForm = ({ isOpen, name, title, children, ...rest }) => {
+  const buttonClassName = `popup__btn-save ${
+    rest.disabled ? "popup__btn-save_disabled" : ""
+  }`;
+
   return (
     <div
       className={
@@ -22,13 +26,16 @@ function PopupWithForm({ isOpen, name, title, children, ...rest }) {
         ></button>
         <div className="popup__title">{title}</div>
         <>{children}</>
-        {rest.isLoading 
-        ? <button className="popup__btn-save" id="saveButtonProfile">{rest. buttonTextIsLoading}</button>
-        : <button className="popup__btn-save" id="saveButtonProfile">{rest.buttonText}</button>
-        }
+        {rest.isLoading ? (
+          <button className="popup__btn-save" id="saveButtonProfile">
+            {rest.buttonTextIsLoading}
+          </button>
+        ) : (
+          <button disabled={rest.disabled} className={buttonClassName}>
+            {rest.buttonText}
+          </button>
+        )}
       </form>
     </div>
   );
-}
-
-export default PopupWithForm;
+};

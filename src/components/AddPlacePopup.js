@@ -1,26 +1,26 @@
-import React from "react";
-import PopupWithForm from "./PopupWithForm";
+import React, { useCallback } from "react";
+import { PopupWithForm } from "./PopupWithForm";
 
-const AddPlacePopup = (props) => {
+export const AddPlacePopup = (props) => {
+  
   const [place, setPlace] = React.useState("");
   const [link, setLink] = React.useState("");
 
-  function handleChangePlace(e) {
+  const handleChangePlace = useCallback((e) => {
     setPlace(e.target.value);
-  }
+  }, []);
 
-  function handleChangeLink(e) {
+  const handleChangeLink = useCallback((e) => {
     setLink(e.target.value);
-  }
+  }, []);
 
-  function handleSubmit(e) {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
-
     props.onAddPlace({
       place,
       link,
     });
-  }
+  }, [place, link, props]);
 
   React.useEffect(() => {
     setPlace("");
@@ -51,6 +51,7 @@ const AddPlacePopup = (props) => {
               name={place}
               value={place}
               onChange={handleChangePlace}
+              //onChange={handleInputChange}
             />
             <span id="place-error" className="popup__input"></span>
           </div>
@@ -63,6 +64,7 @@ const AddPlacePopup = (props) => {
               name={link}
               value={link}
               onChange={handleChangeLink}
+              //onChange={handleInputChange}
             />
             <span id="link-error" className="popup__input"></span>
           </div>
@@ -71,5 +73,3 @@ const AddPlacePopup = (props) => {
     </PopupWithForm>
   );
 };
-
-export default AddPlacePopup;

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import { Header} from "./Header";
 import api from "../utils/Api";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import DeletePlacePopup from "./DeletePlacePopup";
-import Main from "./Main";
-import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
-import ImagePopup from "./ImagePopup";
+import { EditProfilePopup } from "./EditProfilePopup";
+import { EditAvatarPopup } from "./EditAvatarPopup";
+import { AddPlacePopup } from "./AddPlacePopup";
+import { DeletePlacePopup } from "./DeletePlacePopup";
+import { Main } from "./Main";
+import { Footer } from "./Footer";
+import { ImagePopup } from "./ImagePopup";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 
 function App() {

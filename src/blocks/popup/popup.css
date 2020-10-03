@@ -15,6 +15,8 @@
 @import url(./__btn-save/_disabled/popup__btn-save_disabled.css);
 @import url(./__container/_size/popup__container_size_small.css);
 @import url(./__container/_size/popup__container_size_medium.css);
+@import url(./__input/popup__input.css);
+
 
 .popup {
   width: 100%;

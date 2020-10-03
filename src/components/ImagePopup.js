@@ -1,6 +1,6 @@
 import React from "react";
 
-const ImagePopup = (card) => {
+export const ImagePopup = (card) => {
   return (
     <div
       className={
@@ -23,6 +23,4 @@ const ImagePopup = (card) => {
       </form>
     </div>
   );
-};
-
-export default ImagePopup;
+}

@@ -1,3 +1,5 @@
+@import url(./_disabled/popup__btn-save_disabled.css);
+
 .popup__btn-save {
   background-color: black;
   height: 50.15px;

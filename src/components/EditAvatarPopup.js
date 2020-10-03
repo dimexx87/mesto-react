@@ -1,15 +1,15 @@
-import React from "react";
-import PopupWithForm from "./PopupWithForm";
+import React, { useCallback } from "react";
+import { PopupWithForm } from "./PopupWithForm";
 
-const EditAvatarPopup = (props) => {
+export const EditAvatarPopup = (props) => {
   const linkRef = React.useRef("");
 
-  function handleSubmit(e) {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     props.onUpdateAvatar({
       avatar: linkRef.current.value,
     });
-  }
+  }, [props]);
 
   React.useEffect(() => {
     linkRef.current.value = "";
@@ -44,4 +44,4 @@ const EditAvatarPopup = (props) => {
   );
 };
 
-export default EditAvatarPopup
+export default EditAvatarPopup;
