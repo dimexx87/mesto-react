@@ -23,4 +23,4 @@ export const ImagePopup = (card) => {
       </form>
     </div>
   );
-}
+};

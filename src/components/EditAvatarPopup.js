@@ -4,12 +4,15 @@ import { PopupWithForm } from "./PopupWithForm";
 export const EditAvatarPopup = (props) => {
   const linkRef = React.useRef("");
 
-  const handleSubmit = useCallback((e) => {
-    e.preventDefault();
-    props.onUpdateAvatar({
-      avatar: linkRef.current.value,
-    });
-  }, [props]);
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      props.onUpdateAvatar({
+        avatar: linkRef.current.value,
+      });
+    },
+    [props]
+  );
 
   React.useEffect(() => {
     linkRef.current.value = "";
@@ -23,8 +26,7 @@ export const EditAvatarPopup = (props) => {
       name={"editAvatarForm"}
       title={"Обновить аватар"}
       isLoading={props.isLoading}
-      buttonText={"Сохранить"}
-      buttonTextIsLoading={"Сохранение ..."}
+      buttonText={props.isLoading ? "Сохранение ..." : "Сохранить"}
     >
       {
         <div className="popup__field popup__field_info_other">

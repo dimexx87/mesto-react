@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { PopupWithForm } from "./PopupWithForm";
 
 export const AddPlacePopup = (props) => {
-  
   const [place, setPlace] = React.useState("");
   const [link, setLink] = React.useState("");
 
@@ -14,13 +13,16 @@ export const AddPlacePopup = (props) => {
     setLink(e.target.value);
   }, []);
 
-  const handleSubmit = useCallback((e) => {
-    e.preventDefault();
-    props.onAddPlace({
-      place,
-      link,
-    });
-  }, [place, link, props]);
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      props.onAddPlace({
+        place,
+        link,
+      });
+    },
+    [place, link, props]
+  );
 
   React.useEffect(() => {
     setPlace("");
@@ -35,8 +37,7 @@ export const AddPlacePopup = (props) => {
       name={"addCardForm"}
       title={"Новое место"}
       isLoading={props.isLoading}
-      buttonText={"Добавить"}
-      buttonTextIsLoading={"Добавление ..."}
+      buttonText={props.isLoading ? "Добавление..." : "Добавить"}
     >
       {
         <>

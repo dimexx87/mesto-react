@@ -13,7 +13,9 @@ const validators = {
     maxLength: (value) => {
       return value && value.length > 20;
     },
-    containNumbers: (value) => {return !/^[а-яА-ЯёЁa-zA-Z\s]+$/.test(value); },
+    containNumbers: (value) => {
+      return !/^[а-яА-ЯёЁa-zA-Z\s]+$/.test(value);
+    },
   },
   description: {
     required: (value) => {
@@ -104,8 +106,7 @@ export const EditProfilePopup = (props) => {
       name={"editProfileForm"}
       title={"Редактировать профиль"}
       isLoading={props.isLoading}
-      buttonText={"Сохранить"}
-      buttonTextIsLoading={"Сохранение ..."}
+      buttonText={props.isLoading ? "Сохранение ..." : "Сохранить"}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

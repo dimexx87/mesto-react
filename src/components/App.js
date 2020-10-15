@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Header} from "./Header";
+import { Header } from "./Header";
 import api from "../utils/Api";
 import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
@@ -18,7 +18,31 @@ function App() {
   const [deletingCard, setDeletingCard] = useState("");
 
   useEffect(() => {
-    setStartIsLoading(true)
+    const handleEscClose = (e) => {
+      if (e.keyCode === 27) {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleMouseClose = (e) => {
+      if (e.target === e.target.closest(".popup")) {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener("click", handleMouseClose);
+    return () => {
+      document.removeEventListener("click", handleMouseClose);
+    };
+  }, []);
+
+  useEffect(() => {
+    setStartIsLoading(true);
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then((response) => {
         const [profile, cards] = response;
@@ -36,9 +60,9 @@ function App() {
         }));
         setCards(items);
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) =>
+        console.log(`Загрузка информации о пользователе и карточки: ${err}`)
+      )
       .finally(() => {
         setStartIsLoading(false);
       });
@@ -69,9 +93,7 @@ function App() {
         // Обновляем стейт
         handleUpdateCard({ newCards });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(`Изменения статуса лайка: ${err}`));
   }
 
   function handleCardDelete(card) {
@@ -83,9 +105,7 @@ function App() {
         setCards(withoutDeleted);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) => console.log(`Удаление карточки: ${err}`))
       .finally(() => {
         setIsLoading(false);
       });
@@ -113,9 +133,9 @@ function App() {
         setCurrentUser(response);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) =>
+        console.log(`Изменения информации о пользователе: ${err}`)
+      )
       .finally(() => {
         setIsLoading(false);
       });
@@ -129,9 +149,7 @@ function App() {
         setCurrentUser(response);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) => console.log(`Обновление аватара пользователя: ${err}`))
       .finally(() => {
         setIsLoading(false);
       });
@@ -154,9 +172,7 @@ function App() {
         setCards([newCardFormat, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) => console.log(`Добавление новой карточки: ${err}`))
       .finally(() => {
         setIsLoading(false);
       });

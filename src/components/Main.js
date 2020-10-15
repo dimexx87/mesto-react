@@ -54,4 +54,4 @@ export const Main = ({ cards, ...rest }) => {
       </section>
     </main>
   );
-}
+};
