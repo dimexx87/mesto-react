@@ -1,39 +1,51 @@
 import React, { useCallback } from "react";
 import { PopupWithForm } from "./PopupWithForm";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export const AddPlacePopup = (props) => {
   const [place, setPlace] = React.useState("");
   const [link, setLink] = React.useState("");
 
-  const handleChangePlace = useCallback((e) => {
-    setPlace(e.target.value);
-  }, []);
+  const initialValues = {
+    place: "",
+    link: "",
+  };
 
-  const handleChangeLink = useCallback((e) => {
-    setLink(e.target.value);
-  }, []);
+  const onSubmit = (values) => {
+    const { place, link } = values;
+    props.onAddPlace({
+      place,
+      link,
+    });
+  };
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      props.onAddPlace({
-        place,
-        link,
-      });
-    },
-    [place, link, props]
-  );
+  const validationSchema = Yup.object({
+    place: Yup.string().required("Required"),
+    link: Yup.string().url("Incorrect format блять").required("Required"),
+  });
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema
+    //validate,
+  });
+  console.log("Visited fields", formik.touched);
 
   React.useEffect(() => {
-    setPlace("");
-    setLink("");
+    formik.values.place = "";
+    formik.values.link = "";
+    formik.touched.place = false;
+    formik.touched.link = false;
   }, [props.isOpen]);
 
   return (
     <PopupWithForm
       isOpen={props.isOpen}
       onClose={props.onClose}
-      onSubmit={handleSubmit}
+      onSubmit={formik.handleSubmit}
+      //onSubmit={handleSubmit}
       name={"addCardForm"}
       title={"Новое место"}
       isLoading={props.isLoading}
@@ -46,28 +58,36 @@ export const AddPlacePopup = (props) => {
               type="text"
               placeholder="Название"
               className="popup__text"
-              minLength="1"
-              maxLength="30"
-              required
-              name={place}
-              value={place}
-              onChange={handleChangePlace}
-              //onChange={handleInputChange}
+              id="place"
+              name="place"
+              {... formik.getFieldProps('place')}
+              // value={formik.values.place}
+              // onChange={formik.handleChange}
+              // onBlur={formik.handleBlur}
             />
-            <span id="place-error" className="popup__input"></span>
+            {formik.touched.place && formik.errors.place ? (
+              <span className="popup__input popup__input-error">
+                {formik.errors.place}
+              </span>
+            ) : null}
           </div>
           <div className="popup__field popup__field_info_other">
             <input
               type="url"
               placeholder="Ссылка на картинку"
               className="popup__text"
-              required
-              name={link}
-              value={link}
-              onChange={handleChangeLink}
-              //onChange={handleInputChange}
+              id="link"
+              name="link"
+              {... formik.getFieldProps('link')}
+              // value={formik.values.link}
+              // onChange={formik.handleChange}
+              // onBlur={formik.handleBlur}
             />
-            <span id="link-error" className="popup__input"></span>
+            {formik.touched.link && formik.errors.link ? (
+              <span className="popup__input popup__input-error">
+                {formik.errors.link}
+              </span>
+            ) : null}
           </div>
         </>
       }

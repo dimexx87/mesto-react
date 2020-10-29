@@ -2,8 +2,10 @@ import React, { useCallback } from "react";
 import { PopupWithForm } from "./PopupWithForm";
 
 export const EditAvatarPopup = (props) => {
-  const linkRef = React.useRef("");
+  
+  
 
+  const linkRef = React.useRef("");
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -31,11 +33,11 @@ export const EditAvatarPopup = (props) => {
       {
         <div className="popup__field popup__field_info_other">
           <input
-            type="url"
             placeholder="Ссылка на картинку"
             className="popup__text"
             name="link"
             id="link"
+            type="url"
             required
             ref={linkRef}
           />

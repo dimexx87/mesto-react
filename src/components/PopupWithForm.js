@@ -26,7 +26,7 @@ export const PopupWithForm = ({ isOpen, name, title, children, ...rest }) => {
         ></button>
         <div className="popup__title">{title}</div>
         <>{children}</>
-        <button disabled={rest.disabled} className={buttonClassName}>
+        <button type='submit' disabled={rest.disabled} className={buttonClassName}>
           {rest.buttonText}
         </button>
       </form>
