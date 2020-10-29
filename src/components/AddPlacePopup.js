@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { PopupWithForm } from "./PopupWithForm";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 export const AddPlacePopup = (props) => {
@@ -18,8 +18,13 @@ export const AddPlacePopup = (props) => {
   };
 
   const validationSchema = Yup.object({
-    place: Yup.string().required("Required"),
-    link: Yup.string().url("Incorrect format блять").required("Required"),
+    place: Yup.string()
+      .required("Необходимо заполнить")
+      .min(2, "Должно содержать минимум 2 символа")
+      .max(15, "Должно содержать максимум 15 символов"),
+    link: Yup.string()
+      .url("Некорректный формат, необходим формат https://... или http://...")
+      .required("Необходимо заполнить"),
   });
 
   const formik = useFormik({
@@ -33,6 +38,7 @@ export const AddPlacePopup = (props) => {
     formik.values.link = "";
     formik.touched.place = false;
     formik.touched.link = false;
+    formik.isValid = true;
   }, [props.isOpen]);
 
   return (
@@ -40,11 +46,11 @@ export const AddPlacePopup = (props) => {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={formik.handleSubmit}
-      //onSubmit={handleSubmit}
       name={"addCardForm"}
       title={"Новое место"}
       isLoading={props.isLoading}
       buttonText={props.isLoading ? "Добавление..." : "Добавить"}
+      disabled={!formik.isValid}
     >
       {
         <>
@@ -56,9 +62,6 @@ export const AddPlacePopup = (props) => {
               id="place"
               name="place"
               {...formik.getFieldProps("place")}
-              // value={formik.values.place}
-              // onChange={formik.handleChange}
-              // onBlur={formik.handleBlur}
             />
             {formik.touched.place && formik.errors.place ? (
               <span className="popup__input popup__input-error">
