@@ -1,12 +1,9 @@
 import React, { useCallback } from "react";
 import { PopupWithForm } from "./PopupWithForm";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 
 export const AddPlacePopup = (props) => {
-  const [place, setPlace] = React.useState("");
-  const [link, setLink] = React.useState("");
-
   const initialValues = {
     place: "",
     link: "",
@@ -28,10 +25,8 @@ export const AddPlacePopup = (props) => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validationSchema
-    //validate,
+    validationSchema,
   });
-  console.log("Visited fields", formik.touched);
 
   React.useEffect(() => {
     formik.values.place = "";
@@ -60,7 +55,7 @@ export const AddPlacePopup = (props) => {
               className="popup__text"
               id="place"
               name="place"
-              {... formik.getFieldProps('place')}
+              {...formik.getFieldProps("place")}
               // value={formik.values.place}
               // onChange={formik.handleChange}
               // onBlur={formik.handleBlur}
@@ -78,10 +73,7 @@ export const AddPlacePopup = (props) => {
               className="popup__text"
               id="link"
               name="link"
-              {... formik.getFieldProps('link')}
-              // value={formik.values.link}
-              // onChange={formik.handleChange}
-              // onBlur={formik.handleBlur}
+              {...formik.getFieldProps("link")}
             />
             {formik.touched.link && formik.errors.link ? (
               <span className="popup__input popup__input-error">
